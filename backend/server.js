@@ -7,6 +7,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
+import authRoutes from './routes/authRoutes.js';
+import documentRoutes from './routes/documentRoutes.js';
 // import { error } from 'console';
 
 
@@ -35,7 +37,11 @@ app.use(express.urlencoded({extended:true}));
 app.use('/uploads',express.static(path.join(__dirname,'uploads')));
 
 // Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/documents', documentRoutes);  
+
 app.use(errorHandler);
+
 
  //404 error handle garna middleware
 app.use((req,res,next)=>{
